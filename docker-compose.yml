@@ -18,7 +18,7 @@ services:
     image: grafana/promtail:2.8.0
     volumes:
       - /var/log:/var/log
-      - /data/gameserver/logs/dbserver/:/data/gameserver/logs/dbserver/
+        #      - /data/gameserver/logs/dbserver/:/data/gameserver/logs/dbserver/
       - ./promtail-local-config.yml:/etc/promtail/config.yml
     command: -config.file=/etc/promtail/config.yml
     networks:
@@ -26,9 +26,7 @@ services:
 
   grafana:
     environment:
-      - GF_PATHS_PROVISIONING=/etc/grafana/provisioning
-      - GF_AUTH_ANONYMOUS_ENABLED=true
-      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+      GF_SECURITY_ADMIN_PASSWORD: a123456 
     entrypoint:
       - sh
       - -euc
